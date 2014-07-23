@@ -40,20 +40,20 @@ namespace Knufe
         {
             packagePath = Path.GetFullPath(packagePath);
 
-            var defaultLibDir = Path.Combine(new[] { packagePath, "lib" });
+            var defaultLibDirPath = Path.Combine(new[] { packagePath, "lib" });
 
-            Console.WriteLine(defaultLibDir);
+            Console.WriteLine(defaultLibDirPath);
 
             var frameworkSpecificLibDir =
-                Directory.EnumerateDirectories(defaultLibDir)
+                Directory.EnumerateDirectories(defaultLibDirPath)
                 .Select(d => new FrameworkDirectory(d))
                 .Where(d => d.IsAvailableOnCurrentFramework())
                 .OrderByDescending(d => d.FrameworkName.Version)
-                .FirstOrDefault().Path;
+                .FirstOrDefault();
 
             if (frameworkSpecificLibDir != null)
             {
-                Console.WriteLine(frameworkSpecificLibDir);
+                Console.WriteLine(frameworkSpecificLibDir.Path);
             }
         }
     }
