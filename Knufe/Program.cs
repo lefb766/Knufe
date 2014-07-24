@@ -19,6 +19,10 @@ namespace Knufe
 
             switch (args[0].ToLower())
             {
+                case "help":
+                    PrintHelp();
+                    break;
+
                 case "picklibdirs":
                     if (args.Length < 2)
                     {
@@ -31,9 +35,23 @@ namespace Knufe
 
                 default:
                     Console.WriteLine("unknown command: {0}", args[0]);
+                    Console.WriteLine();
+                    PrintHelp();
                     Environment.Exit(1);
                     break;
             }
+        }
+
+        static void PrintHelp()
+        {
+            Console.WriteLine("Usage:");
+            Console.WriteLine("    knufe.exe <command> [options]");
+            Console.WriteLine();
+            Console.WriteLine("Commands:");
+            Console.Write("    PickLibDir <packageDir> ");
+            Console.WriteLine("# list lib dirs appropriate to the current framework");
+            Console.Write("    Help ");
+            Console.WriteLine("# print this help");
         }
 
         static void PickLibDirs(string packagePath)
